@@ -1,0 +1,41 @@
+From 8139862d3d034c100cb7fda576aed05c1cfc91db Mon Sep 17 00:00:00 2001
+From: James Almer <jamrial@gmail.com>
+Date: Thu, 23 Jul 2026 10:39:44 -0300
+Subject: [PATCH] avcodec/get_buffer: use frame pixel format instead of context
+
+The documentation for get_buffer2() states:
+
+"This callback must use the frame values, not the codec context values, to
+calculate the required buffer size."
+
+Fixes wrong output on hbd LCEVC enhanced samples where the base stream is
+8bit.
+
+Signed-off-by: James Almer <jamrial@gmail.com>
+(cherry picked from commit e1c1b6c55835d13647636340d478d370aa48fb8d)
+---
+ libavcodec/get_buffer.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/libavcodec/get_buffer.c b/libavcodec/get_buffer.c
+index 891c424d8bfab..40a59dc391a11 100644
+--- a/libavcodec/get_buffer.c
++++ b/libavcodec/get_buffer.c
+@@ -106,7 +106,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
+         do {
+             // NOTE: do not align linesizes individually, this breaks e.g. assumptions
+             // that linesize[0] == 2*linesize[1] in the MPEG-encoder for 4:2:2
+-            ret = av_image_fill_linesizes(linesize, avctx->pix_fmt, w);
++            ret = av_image_fill_linesizes(linesize, frame->format, w);
+             if (ret < 0)
+                 goto fail;
+             // increase alignment of w for next try (rhs gives the lowest bit set in w)
+@@ -119,7 +119,7 @@ FF_ENABLE_DEPRECATION_WARNINGS
+ 
+         for (i = 0; i < 4; i++)
+             linesize1[i] = linesize[i];
+-        ret = av_image_fill_plane_sizes(size, avctx->pix_fmt, h, linesize1);
++        ret = av_image_fill_plane_sizes(size, frame->format, h, linesize1);
+         if (ret < 0)
+             goto fail;
+ 

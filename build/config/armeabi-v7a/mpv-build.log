@@ -1,0 +1,434 @@
+The Meson build system
+Version: 1.9.1
+Source dir: $WORK/remote-qa/20261013/native-fix/mpv
+Build dir: $WORK/remote-qa/20261013/media-hardening/armeabi-v7a/mpv-build
+Build type: cross build
+Project name: mpv
+Project version: 0.41.0
+C compiler for the host machine: armv7a-linux-androideabi21-clang (clang 19.0.1 "Android (13624864, +pgo, -bolt, +lto, -mlgo, based on r530567e) clang version 19.0.1 (https://android.googlesource.com/toolchain/llvm-project 97a699bf4812a18fb657c2779f5296a4ab2694d2)")
+C linker for the host machine: armv7a-linux-androideabi21-clang ld.lld 19.0.1
+C compiler for the build machine: cc (clang 17.0.0 "Apple clang version 17.0.0 (clang-1700.6.4.2)")
+C linker for the build machine: cc ld64 1230.1
+Build machine cpu family: aarch64
+Build machine cpu: aarch64
+Host machine cpu family: arm
+Host machine cpu: armv7a
+Target machine cpu family: arm
+Target machine cpu: armv7a
+Program python3 found: YES ($WORK/native-media-candidate/host-tools/bin/python3)
+Found pkg-config: YES (/opt/homebrew/bin/pkg-config) 0.29.2
+WARNING: Static library 'android' not found for dependency 'libavcodec', may not be statically linked
+Run-time dependency libavcodec found: YES 60.31.102
+WARNING: Static library 'android' not found for dependency 'libavfilter', may not be statically linked
+Run-time dependency libavfilter found: YES 9.12.100
+WARNING: Static library 'android' not found for dependency 'libavformat', may not be statically linked
+Run-time dependency libavformat found: YES 60.16.101
+WARNING: Static library 'android' not found for dependency 'libavutil', may not be statically linked
+Run-time dependency libavutil found: YES 58.29.100
+WARNING: Static library 'android' not found for dependency 'libswresample', may not be statically linked
+Run-time dependency libswresample found: YES 4.12.100
+WARNING: Static library 'android' not found for dependency 'libswscale', may not be statically linked
+Run-time dependency libswscale found: YES 7.5.100
+Run-time dependency libplacebo found: YES 7.360.1
+Run-time dependency libass found: YES 0.17.5
+Compiler for C supports arguments -Wdisabled-optimization: YES 
+Compiler for C supports arguments -Wempty-body: YES 
+Compiler for C supports arguments -Wformat: YES 
+Compiler for C supports arguments -Wimplicit-fallthrough: YES 
+Compiler for C supports arguments -Woverflow: YES 
+Compiler for C supports arguments -Wparentheses: YES 
+Compiler for C supports arguments -Wpointer-arith: YES 
+Compiler for C supports arguments -Wshadow: YES 
+Compiler for C supports arguments -Wundef: YES 
+Compiler for C supports arguments -Wvla: YES 
+Compiler for C supports arguments -Wno-cast-function-type: YES 
+Compiler for C supports arguments -Wno-format-zero-length: YES 
+Compiler for C supports arguments -Wno-missing-field-initializers: YES 
+Compiler for C supports arguments -Wno-sign-compare: YES 
+Compiler for C supports arguments -Wno-switch: YES 
+Compiler for C supports arguments -Wno-unused-parameter: YES 
+Compiler for C supports arguments -fno-math-errno: YES 
+Compiler for C supports arguments -fno-signed-zeros: YES 
+Compiler for C supports arguments -fno-trapping-math: YES 
+Compiler for C supports arguments -Wmissing-prototypes: YES 
+Compiler for C supports arguments -Wstrict-prototypes: YES 
+Compiler for C supports arguments -Werror=implicit-function-declaration: YES 
+Compiler for C supports arguments -Wno-pointer-sign: YES 
+Compiler for C supports arguments -Wformat -Werror=format-security: YES 
+Compiler for C supports link arguments -Wl,--nxcompat,--no-seh,--dynamicbase: NO 
+Compiler for C supports link arguments -Wl,-z,noexecstack: YES 
+Run-time dependency dl found: YES
+Library atomic found: YES
+Compiler for C supports link arguments -rdynamic: YES 
+Run-time dependency threads found: YES
+Header "pthread.h" has symbol "pthread_condattr_setclock" with dependency threads: YES 
+Run-time dependency appleframeworks found: NO (tried framework)
+Checking for function "fork" : YES 
+Checking for function "ppoll" : YES 
+Checking for function "memrchr" : YES 
+Library android found: YES
+Library windowsapp skipped: feature uwp disabled
+Checking for function "glob" : NO 
+Header "sys/vt.h" has symbol "VT_GETMODE" : YES 
+Header "dev/wscons/wsdisplay_usl_io.h" has symbol "VT_GETMODE" : NO 
+Checking for function "pthread_setname_np" with dependency threads: YES 
+Checking for function "fstatfs" : NO 
+Checking for function "fstatfs" : YES 
+Compiler for C supports function attribute vector_size: YES 
+Program $WORK/remote-qa/20261013/native-fix/mpv/TOOLS/docutils-wrapper.py found: YES ($WORK/remote-qa/20261013/native-fix/mpv/TOOLS/docutils-wrapper.py)
+Program $WORK/remote-qa/20261013/native-fix/mpv/TOOLS/file2string.py found: YES ($WORK/remote-qa/20261013/native-fix/mpv/TOOLS/file2string.py)
+Program $WORK/remote-qa/20261013/native-fix/mpv/TOOLS/matroska.py found: YES ($WORK/remote-qa/20261013/native-fix/mpv/TOOLS/matroska.py)
+Program $WORK/remote-qa/20261013/native-fix/mpv/TOOLS/gen-mpv-desktop.py found: YES ($WORK/remote-qa/20261013/native-fix/mpv/TOOLS/gen-mpv-desktop.py)
+Program git found: YES (/opt/homebrew/bin/git)
+Dependency libcdio skipped: feature cdda disabled
+Dependency libcdio_paranoia skipped: feature cdda disabled
+Has header "linux/dvb/frontend.h" skipped: feature dvbin disabled
+Dependency dvdnav skipped: feature dvdnav disabled
+Dependency iconv skipped: feature iconv disabled
+Found CMake: NO
+Run-time dependency mujs found: NO (tried pkgconfig and cmake)
+Run-time dependency lcms2 found: NO (tried pkgconfig and cmake)
+Run-time dependency libarchive found: NO (tried pkgconfig and cmake)
+Run-time dependency libavdevice found: NO (tried pkgconfig and cmake)
+Run-time dependency libbluray found: NO (tried pkgconfig and cmake)
+Library m found: YES
+Library rt found: NO
+Run-time dependency rubberband found: NO (tried pkgconfig and cmake)
+sdl2-config found: NO
+Run-time dependency sdl2 found: NO (tried pkgconfig, config-tool and cmake)
+Dependency uchardet skipped: feature uchardet disabled
+Run-time dependency vapoursynth found: NO (tried pkgconfig and cmake)
+Run-time dependency vapoursynth-script found: NO (tried pkgconfig and cmake)
+Run-time dependency xfixes found: NO (tried pkgconfig and cmake)
+Run-time dependency x11 found: NO (tried pkgconfig and cmake)
+Run-time dependency zimg found: NO (tried pkgconfig and cmake)
+Run-time dependency zlib found: YES 1.2.8
+Run-time dependency alsa found: NO (tried pkgconfig and cmake)
+Dependency appleframeworks (modules: Foundation, AudioToolbox) skipped: feature audiounit disabled
+Header "AudioToolbox/AudioToolbox.h" has symbol "kAudioUnitSubType_RemoteIO" skipped: feature audiounit disabled
+Run-time dependency appleframeworks found: NO (tried framework)
+Run-time dependency appleframeworks found: NO (tried framework)
+Dependency jack skipped: feature jack disabled
+Dependency openal skipped: feature openal disabled
+Header "aaudio/AAudio.h" has symbol "AAudioStream" : YES 
+Library OpenSLES found: YES
+Header "sys/soundcard.h" has symbol "SNDCTL_DSP_HALT" skipped: feature oss-audio disabled
+Run-time dependency libpipewire-0.3 found: NO (tried pkgconfig and cmake)
+Run-time dependency libpulse found: NO (tried pkgconfig and cmake)
+Run-time dependency sndio found: NO (tried pkgconfig and cmake)
+Header "audioclient.h" has symbol "IAudioClient" skipped: feature wasapi disabled
+Dependency caca skipped: feature caca disabled
+Has header "d3d9.h" skipped: feature direct3d disabled
+Run-time dependency libdrm found: NO (tried pkgconfig and cmake)
+Run-time dependency libdisplay-info found: NO (tried pkgconfig and cmake)
+Dependency gbm skipped: feature gbm disabled
+Run-time dependency libjpeg found: NO (tried pkgconfig and cmake)
+Dependency shaderc skipped: feature shaderc disabled
+Run-time dependency libsixel found: NO (tried pkgconfig and cmake)
+Checking for function "shm_open" : NO 
+Dependency spirv-cross-c-shared skipped: feature spirv-cross disabled
+Run-time dependency wayland-client found: NO (tried pkgconfig and cmake)
+Run-time dependency wayland-cursor found: NO (tried pkgconfig and cmake)
+Run-time dependency wayland-protocols found: NO (tried pkgconfig and cmake)
+Run-time dependency xkbcommon found: NO (tried pkgconfig and cmake)
+Run-time dependency wayland-client found: NO (tried pkgconfig and cmake)
+Has header "linux/input-event-codes.h" with dependency wayland-client: YES 
+Program wayland-scanner found: NO
+Dependency x11 skipped: feature x11 disabled
+Dependency xscrnsaver skipped: feature x11 disabled
+Dependency xext skipped: feature x11 disabled
+Dependency xpresent skipped: feature x11 disabled
+Dependency xrandr skipped: feature x11 disabled
+Dependency xv skipped: feature xv disabled
+Library EGL skipped: feature egl-angle-lib disabled
+Run-time dependency egl found: NO (tried pkgconfig and cmake)
+Library EGL found: YES
+Dependency wayland-egl skipped: feature egl-wayland disabled
+Dependency vulkan skipped: feature vulkan disabled
+Checking for function "vkCreateDisplayPlaneSurfaceKHR" with dependency vulkan: NO 
+Run-time dependency ffnvcodec found: NO (tried pkgconfig and cmake)
+Header "media/NdkImageReader.h" has symbol "AIMAGE_FORMAT_PRIVATE" : YES 
+Header "OpenGLES/ES3/glext.h" has symbol "GL_RGB32F" skipped: feature ios-gl disabled
+Run-time dependency libva found: NO (tried pkgconfig and cmake)
+Dependency libva-drm skipped: feature vaapi-drm disabled
+Dependency libva-wayland skipped: feature vaapi-wayland disabled
+Dependency libva-x11 skipped: feature vaapi-x11 disabled
+Dependency libva-win32 skipped: feature vaapi-win32 disabled
+Dependency vdpau skipped: feature vdpau disabled
+Dependency appleframeworks (modules: CoreVideo) skipped: feature videotoolbox-pl disabled
+Program xcrun skipped: feature swift-build disabled
+Program rst2man rst2man.py skipped: feature manpage-build disabled
+Program rst2html rst2html.py skipped: feature html-build disabled
+Program rst2pdf skipped: feature pdf-build disabled
+Configuring config.h using configuration
+Message: List of enabled features: aaudio android android-media-ndk audiotrack cplugins egl-android ffmpeg gl glibc-thread-name libass libdl libplacebo linux-fstatfs memrchr opensles posix ppoll pthread-condattr-setclock vector vt.h zlib
+Fetching value of define "MPV_CLIENT_API_VERSION" : (((2) << 16) | (5) | 0UL) 
+Compiler for C supports link arguments -Wl,-Bsymbolic: YES 
+Build targets in project: 26
+
+mpv 0.41.0
+
+    cocoa          : NO
+    d3d11          : NO
+    drm            : NO
+    javascript     : NO
+    libmpv         : YES
+    lua            : NO
+    opengl         : YES
+    vulkan         : NO
+    wayland        : NO
+    x11            : NO
+
+  User defined options
+    Cross files    : $WORK/native-media-candidate/clean-build/armeabi-v7a/clean-armv7.cross
+    b_lundef       : true
+    build-date     : false
+    c_link_args    : ['-Wl,-z,max-page-size=16384','-Wl,--exclude-libs,ALL','-lc++_static','-lc++abi','-lunwind']
+    cplayer        : false
+    default_library: shared
+    gpl            : false
+    iconv          : disabled
+    libdir         : lib
+    libmpv         : true
+    lua            : disabled
+    manpage-build  : disabled
+    prefer_static  : true
+    prefix         : /
+    vulkan         : disabled
+
+Found ninja-1.13.0.git.kitware.jobserver-pipe-1 at $WORK/native-media-candidate/host-tools/bin/ninja
+ninja: Entering directory `$WORK/remote-qa/20261013/media-hardening/armeabi-v7a/mpv-build'
+[1/234] Generating ebml_defs.inc with a custom command
+[2/234] Generating ebml_types.h with a custom command
+[3/234] Generating etc/mpv-icon-8bit-16x16.png with a custom command
+[4/234] Generating etc/mpv-icon-8bit-32x32.png with a custom command
+[5/234] Generating etc/mpv-icon-8bit-64x64.png with a custom command
+[6/234] Generating etc/mpv-icon-8bit-128x128.png with a custom command
+[7/234] Generating etc/input.conf with a custom command
+[8/234] Generating common/version.h with a custom command (wrapped by meson because command contains newlines, because command is too long)
+[9/234] Generating etc/builtin.conf with a custom command
+[10/234] Generating player/javascript/defaults.js with a custom command
+[11/234] Generating player/lua/defaults.lua with a custom command
+[12/234] Generating player/lua/assdraw.lua with a custom command
+[13/234] Generating player/lua/options.lua with a custom command
+[14/234] Generating player/lua/osc.lua with a custom command
+[15/234] Generating player/lua/ytdl_hook.lua with a custom command
+[16/234] Generating player/lua/console.lua with a custom command
+[17/234] Generating player/lua/stats.lua with a custom command
+[18/234] Generating player/lua/input.lua with a custom command
+[19/234] Generating player/lua/auto_profiles.lua with a custom command
+[20/234] Generating player/lua/fzy.lua with a custom command
+[21/234] Generating player/lua/select.lua with a custom command
+[22/234] Generating player/lua/positioning.lua with a custom command
+[23/234] Generating player/lua/commands.lua with a custom command
+[24/234] Generating sub/osd_font.otf with a custom command
+[25/234] Generating player/lua/context_menu.lua with a custom command
+[26/234] Compiling C object libmpv.so.p/audio_aframe.c.o
+[27/234] Compiling C object libmpv.so.p/audio_chmap.c.o
+[28/234] Compiling C object libmpv.so.p/audio_chmap_avchannel.c.o
+[29/234] Compiling C object libmpv.so.p/audio_chmap_sel.c.o
+[30/234] Compiling C object libmpv.so.p/audio_decode_ad_lavc.c.o
+[31/234] Compiling C object libmpv.so.p/audio_filter_af_drop.c.o
+[32/234] Compiling C object libmpv.so.p/audio_decode_ad_spdif.c.o
+[33/234] Compiling C object libmpv.so.p/audio_filter_af_format.c.o
+[34/234] Compiling C object libmpv.so.p/audio_filter_af_lavcac3enc.c.o
+[35/234] Compiling C object libmpv.so.p/audio_filter_af_scaletempo2.c.o
+[36/234] Compiling C object libmpv.so.p/audio_filter_af_scaletempo.c.o
+[37/234] Compiling C object libmpv.so.p/audio_fmt-conversion.c.o
+[38/234] Compiling C object libmpv.so.p/audio_format.c.o
+[39/234] Compiling C object libmpv.so.p/audio_filter_af_scaletempo2_internals.c.o
+[40/234] Compiling C object libmpv.so.p/audio_out_ao.c.o
+[41/234] Compiling C object libmpv.so.p/audio_out_ao_lavc.c.o
+[42/234] Compiling C object libmpv.so.p/audio_out_ao_null.c.o
+[43/234] Compiling C object libmpv.so.p/audio_out_ao_pcm.c.o
+[44/234] Compiling C object libmpv.so.p/audio_out_buffer.c.o
+[45/234] Compiling C object libmpv.so.p/common_av_common.c.o
+[46/234] Compiling C object libmpv.so.p/common_av_log.c.o
+[47/234] Compiling C object libmpv.so.p/common_codecs.c.o
+[48/234] Compiling C object libmpv.so.p/common_common.c.o
+[49/234] Compiling C object libmpv.so.p/common_encode_lavc.c.o
+[50/234] Compiling C object libmpv.so.p/common_msg.c.o
+[51/234] Compiling C object libmpv.so.p/common_playlist.c.o
+[52/234] Compiling C object libmpv.so.p/common_recorder.c.o
+[53/234] Compiling C object libmpv.so.p/common_stats.c.o
+[54/234] Compiling C object libmpv.so.p/common_version.c.o
+[55/234] Compiling C object libmpv.so.p/common_tags.c.o
+[56/234] Compiling C object libmpv.so.p/demux_codec_tags.c.o
+[57/234] Compiling C object libmpv.so.p/demux_cue.c.o
+[58/234] Compiling C object libmpv.so.p/demux_cache.c.o
+[59/234] Compiling C object libmpv.so.p/demux_demux_cue.c.o
+[60/234] Compiling C object libmpv.so.p/demux_demux_disc.c.o
+[61/234] Compiling C object libmpv.so.p/demux_demux_edl.c.o
+[62/234] Compiling C object libmpv.so.p/demux_demux.c.o
+[63/234] Compiling C object libmpv.so.p/demux_demux_lavf.c.o
+[64/234] Compiling C object libmpv.so.p/demux_demux_mf.c.o
+[65/234] Compiling C object libmpv.so.p/demux_demux_mkv_timeline.c.o
+[66/234] Compiling C object libmpv.so.p/demux_demux_mpv.c.o
+[67/234] Compiling C object libmpv.so.p/demux_demux_null.c.o
+[68/234] Compiling C object libmpv.so.p/demux_demux_playlist.c.o
+[69/234] Compiling C object libmpv.so.p/demux_demux_raw.c.o
+[70/234] Compiling C object libmpv.so.p/demux_demux_mkv.c.o
+[71/234] Compiling C object libmpv.so.p/demux_demux_timeline.c.o
+[72/234] Compiling C object libmpv.so.p/demux_packet.c.o
+[73/234] Compiling C object libmpv.so.p/demux_ebml.c.o
+[74/234] Compiling C object libmpv.so.p/demux_packet_pool.c.o
+[75/234] Compiling C object libmpv.so.p/demux_timeline.c.o
+[76/234] Compiling C object libmpv.so.p/filters_f_async_queue.c.o
+[77/234] Compiling C object libmpv.so.p/filters_f_autoconvert.c.o
+[78/234] Compiling C object libmpv.so.p/filters_f_auto_filters.c.o
+[79/234] Compiling C object libmpv.so.p/filters_f_demux_in.c.o
+[80/234] Compiling C object libmpv.so.p/filters_f_decoder_wrapper.c.o
+[81/234] Compiling C object libmpv.so.p/filters_f_hwtransfer.c.o
+[82/234] Compiling C object libmpv.so.p/filters_f_output_chain.c.o
+[83/234] Compiling C object libmpv.so.p/filters_f_lavfi.c.o
+[84/234] Compiling C object libmpv.so.p/filters_f_swscale.c.o
+[85/234] Compiling C object libmpv.so.p/filters_f_swresample.c.o
+[86/234] Compiling C object libmpv.so.p/filters_f_utils.c.o
+[87/234] Compiling C object libmpv.so.p/filters_frame.c.o
+[88/234] Compiling C object libmpv.so.p/filters_filter.c.o
+[89/234] Compiling C object libmpv.so.p/filters_user_filters.c.o
+[90/234] Compiling C object libmpv.so.p/input_event.c.o
+[91/234] Compiling C object libmpv.so.p/input_cmd.c.o
+[92/234] Compiling C object libmpv.so.p/input_ipc.c.o
+[93/234] Compiling C object libmpv.so.p/input_keycodes.c.o
+[94/234] Compiling C object libmpv.so.p/input_input.c.o
+[95/234] Compiling C object libmpv.so.p/misc_bstr.c.o
+[96/234] Compiling C object libmpv.so.p/misc_charset_conv.c.o
+[97/234] Compiling C object libmpv.so.p/misc_codepoint_width.c.o
+[98/234] Compiling C object libmpv.so.p/misc_dispatch.c.o
+[99/234] Compiling C object libmpv.so.p/misc_io_utils.c.o
+[100/234] Compiling C object libmpv.so.p/misc_json.c.o
+[101/234] Compiling C object libmpv.so.p/misc_language.c.o
+[102/234] Compiling C object libmpv.so.p/misc_natural_sort.c.o
+[103/234] Compiling C object libmpv.so.p/misc_node.c.o
+[104/234] Compiling C object libmpv.so.p/misc_path_utils.c.o
+[105/234] Compiling C object libmpv.so.p/misc_random.c.o
+[106/234] Compiling C object libmpv.so.p/misc_rendezvous.c.o
+[107/234] Compiling C object libmpv.so.p/misc_thread_pool.c.o
+[108/234] Compiling C object libmpv.so.p/misc_thread_tools.c.o
+[109/234] Compiling C object libmpv.so.p/options_m_config_core.c.o
+[110/234] Compiling C object libmpv.so.p/options_m_config_frontend.c.o
+[111/234] Compiling C object libmpv.so.p/options_m_property.c.o
+[112/234] Compiling C object libmpv.so.p/options_options.c.o
+[113/234] Compiling C object libmpv.so.p/options_parse_commandline.c.o
+[114/234] Compiling C object libmpv.so.p/options_parse_configfile.c.o
+[115/234] Compiling C object libmpv.so.p/options_m_option.c.o
+[116/234] Compiling C object libmpv.so.p/options_path.c.o
+[117/234] Compiling C object libmpv.so.p/player_audio.c.o
+[118/234] Compiling C object libmpv.so.p/player_client.c.o
+[119/234] Compiling C object libmpv.so.p/player_configfiles.c.o
+[120/234] Compiling C object libmpv.so.p/player_external_files.c.o
+[121/234] Compiling C object libmpv.so.p/player_loadfile.c.o
+[122/234] Compiling C object libmpv.so.p/player_command.c.o
+[123/234] Compiling C object libmpv.so.p/player_main.c.o
+[124/234] Compiling C object libmpv.so.p/player_misc.c.o
+[125/234] Compiling C object libmpv.so.p/player_osd.c.o
+[126/234] Compiling C object libmpv.so.p/player_playloop.c.o
+[127/234] Compiling C object libmpv.so.p/player_screenshot.c.o
+[128/234] Compiling C object libmpv.so.p/player_sub.c.o
+[129/234] Compiling C object libmpv.so.p/player_scripting.c.o
+[130/234] Compiling C object libmpv.so.p/player_clipboard_clipboard.c.o
+[131/234] Compiling C object libmpv.so.p/player_clipboard_clipboard-vo.c.o
+[132/234] Compiling C object libmpv.so.p/player_video.c.o
+[133/234] Compiling C object libmpv.so.p/stream_cookies.c.o
+[134/234] Compiling C object libmpv.so.p/stream_stream_avdevice.c.o
+[135/234] Compiling C object libmpv.so.p/stream_stream.c.o
+[136/234] Compiling C object libmpv.so.p/stream_stream_cb.c.o
+[137/234] Compiling C object libmpv.so.p/stream_stream_concat.c.o
+[138/234] Compiling C object libmpv.so.p/stream_stream_edl.c.o
+[139/234] Compiling C object libmpv.so.p/stream_stream_file.c.o
+[140/234] Compiling C object libmpv.so.p/stream_stream_lavf.c.o
+[141/234] Compiling C object libmpv.so.p/stream_stream_memory.c.o
+[142/234] Compiling C object libmpv.so.p/stream_stream_mf.c.o
+[143/234] Compiling C object libmpv.so.p/stream_stream_mpv.c.o
+[144/234] Compiling C object libmpv.so.p/stream_stream_null.c.o
+[145/234] Compiling C object libmpv.so.p/stream_stream_slice.c.o
+[146/234] Compiling C object libmpv.so.p/sub_ass_mp.c.o
+[147/234] Compiling C object libmpv.so.p/sub_dec_sub.c.o
+[148/234] Compiling C object libmpv.so.p/sub_filter_sdh.c.o
+[149/234] Compiling C object libmpv.so.p/sub_draw_bmp.c.o
+[150/234] Compiling C object libmpv.so.p/sub_img_convert.c.o
+[151/234] Compiling C object libmpv.so.p/sub_lavc_conv.c.o
+[152/234] Compiling C object libmpv.so.p/sub_osd.c.o
+[153/234] Compiling C object libmpv.so.p/sub_osd_libass.c.o
+[154/234] Compiling C object libmpv.so.p/sub_sd_lavc.c.o
+[155/234] Compiling C object libmpv.so.p/sub_sd_ass.c.o
+[156/234] Compiling C object libmpv.so.p/video_csputils.c.o
+[157/234] Compiling C object libmpv.so.p/video_filter_refqueue.c.o
+[158/234] Compiling C object libmpv.so.p/video_decode_vd_lavc.c.o
+[159/234] Compiling C object libmpv.so.p/video_filter_vf_sub.c.o
+[160/234] Compiling C object libmpv.so.p/video_filter_vf_format.c.o
+[161/234] Compiling C object libmpv.so.p/video_fmt-conversion.c.o
+[162/234] Compiling C object libmpv.so.p/video_hwdec.c.o
+[163/234] Compiling C object libmpv.so.p/video_image_loader.c.o
+[164/234] Compiling C object libmpv.so.p/video_image_writer.c.o
+[165/234] Compiling C object libmpv.so.p/video_img_format.c.o
+[166/234] Compiling C object libmpv.so.p/video_mp_image_pool.c.o
+[167/234] Compiling C object libmpv.so.p/video_out_aspect.c.o
+[168/234] Compiling C object libmpv.so.p/video_mp_image.c.o
+[169/234] Compiling C object libmpv.so.p/video_out_bitmap_packer.c.o
+[170/234] Compiling C object libmpv.so.p/video_out_dr_helper.c.o
+[171/234] Compiling C object libmpv.so.p/video_out_dither.c.o
+[172/234] Compiling C object libmpv.so.p/video_out_filter_kernels.c.o
+[173/234] Compiling C object libmpv.so.p/video_out_gpu_context.c.o
+[174/234] Compiling C object libmpv.so.p/video_out_gpu_error_diffusion.c.o
+[175/234] Compiling C object libmpv.so.p/video_out_gpu_hwdec.c.o
+[176/234] Compiling C object libmpv.so.p/video_out_gpu_lcms.c.o
+[177/234] Compiling C object libmpv.so.p/video_out_gpu_libmpv_gpu.c.o
+[178/234] Compiling C object libmpv.so.p/video_out_gpu_osd.c.o
+[179/234] Compiling C object libmpv.so.p/video_out_gpu_ra.c.o
+[180/234] Compiling C object libmpv.so.p/video_out_gpu_spirv.c.o
+[181/234] Compiling C object libmpv.so.p/video_out_gpu_shader_cache.c.o
+[182/234] Compiling C object libmpv.so.p/video_out_gpu_utils.c.o
+[183/234] Compiling C object libmpv.so.p/video_out_gpu_user_shaders.c.o
+[184/234] Compiling C object libmpv.so.p/video_out_gpu_video_shaders.c.o
+[185/234] Compiling C object libmpv.so.p/video_out_libmpv_sw.c.o
+[186/234] Compiling C object libmpv.so.p/video_out_vo.c.o
+[187/234] Compiling C object libmpv.so.p/video_out_vo_gpu.c.o
+[188/234] Compiling C object libmpv.so.p/video_out_vo_image.c.o
+[189/234] Compiling C object libmpv.so.p/video_out_gpu_video.c.o
+[190/234] Compiling C object libmpv.so.p/video_out_vo_lavc.c.o
+[191/234] Compiling C object libmpv.so.p/video_out_vo_null.c.o
+[192/234] Compiling C object libmpv.so.p/video_out_vo_libmpv.c.o
+[193/234] Compiling C object libmpv.so.p/video_out_vo_kitty.c.o
+[194/234] Compiling C object libmpv.so.p/video_out_vo_tct.c.o
+[195/234] Compiling C object libmpv.so.p/video_out_win_state.c.o
+[196/234] Compiling C object libmpv.so.p/video_sws_utils.c.o
+[197/234] Compiling C object libmpv.so.p/video_repack.c.o
+[198/234] Compiling C object libmpv.so.p/video_out_placebo_ra_pl.c.o
+[199/234] Compiling C object libmpv.so.p/video_out_placebo_utils.c.o
+[200/234] Compiling C object libmpv.so.p/video_out_gpu_next_context.c.o
+[201/234] Compiling C object libmpv.so.p/osdep_io.c.o
+[202/234] Compiling C object libmpv.so.p/osdep_subprocess.c.o
+[203/234] Compiling C object libmpv.so.p/osdep_timer.c.o
+[204/234] Compiling C object libmpv.so.p/ta_ta.c.o
+[205/234] Compiling C object libmpv.so.p/video_out_vo_gpu_next.c.o
+[206/234] Compiling C object libmpv.so.p/ta_ta_talloc.c.o
+[207/234] Compiling C object libmpv.so.p/ta_ta_utils.c.o
+[208/234] Compiling C object libmpv.so.p/osdep_threads-posix.c.o
+[209/234] Compiling C object libmpv.so.p/osdep_subprocess-posix.c.o
+[210/234] Compiling C object libmpv.so.p/input_ipc-unix.c.o
+[211/234] Compiling C object libmpv.so.p/osdep_poll_wrapper.c.o
+[212/234] Compiling C object libmpv.so.p/sub_filter_regex.c.o
+[213/234] Compiling C object libmpv.so.p/osdep_terminal-unix.c.o
+[214/234] Compiling C object libmpv.so.p/osdep_language-posix.c.o
+[215/234] Compiling C object libmpv.so.p/osdep_als-voctrl.c.o
+[216/234] Compiling C object libmpv.so.p/osdep_android_strnlen.c.o
+[217/234] Compiling C object libmpv.so.p/misc_jni.c.o
+[218/234] Compiling C object libmpv.so.p/video_out_android_common.c.o
+[219/234] Compiling C object libmpv.so.p/video_out_vo_mediacodec_embed.c.o
+[220/234] Compiling C object libmpv.so.p/osdep_path-unix.c.o
+[221/234] Compiling C object libmpv.so.p/osdep_timer-linux.c.o
+[222/234] Compiling C object libmpv.so.p/audio_out_ao_aaudio.c.o
+[223/234] Compiling C object libmpv.so.p/audio_out_ao_audiotrack.c.o
+[224/234] Compiling C object libmpv.so.p/audio_out_ao_opensles.c.o
+[225/234] Compiling C object libmpv.so.p/video_out_opengl_context_android.c.o
+[226/234] Compiling C object libmpv.so.p/video_out_opengl_egl_helpers.c.o
+[227/234] Compiling C object libmpv.so.p/video_out_opengl_common.c.o
+[228/234] Compiling C object libmpv.so.p/video_out_opengl_context.c.o
+[229/234] Compiling C object libmpv.so.p/video_out_opengl_formats.c.o
+[230/234] Compiling C object libmpv.so.p/video_out_opengl_libmpv_gl.c.o
+[231/234] Compiling C object libmpv.so.p/video_out_opengl_utils.c.o
+[232/234] Compiling C object libmpv.so.p/video_out_opengl_ra_gl.c.o
+[233/234] Compiling C object libmpv.so.p/video_out_hwdec_hwdec_aimagereader.c.o
+[234/234] Linking target libmpv.so

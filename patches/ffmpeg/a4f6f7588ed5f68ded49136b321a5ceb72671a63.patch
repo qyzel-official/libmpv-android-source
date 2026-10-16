@@ -1,0 +1,55 @@
+From a4f6f7588ed5f68ded49136b321a5ceb72671a63 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Kacper=20Michaj=C5=82ow?= <kasper93@gmail.com>
+Date: Sat, 15 Aug 2026 00:36:22 +0200
+Subject: [PATCH] avcodec/h264_direct: do not read the other field's rows of
+ colocated mb_type
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+To determine whether the colocated picture is field coded, the temporal
+and spatial direct setup peek at
+sl->ref_list[1][0].parent->mb_type[mb_xy] before mb_xy has been remapped
+to the colocated field's parity. That row belongs to the current field's
+parity, while await_reference_mb_row() above waited on the parity of the
+referenced field, so whenever the two differ the load is unsynchronised
+and with frame threading can observe macroblocks of a field that is
+still being decoded.
+
+Every macroblock of a field picture has MB_TYPE_INTERLACED set, so
+checking field_picture first gives the same result in all correctly
+synchronized cases without touching the mb_type array.
+
+This also fixes few TSAN reported warnings.
+
+Fixes: https://trac.ffmpeg.org/ticket/10891
+Signed-off-by: Kacper Michajłow <kasper93@gmail.com>
+(cherry picked from commit c3a8a223b29260dc170d41c62f9b3b33f6b97b2d)
+---
+ libavcodec/h264_direct.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/libavcodec/h264_direct.c b/libavcodec/h264_direct.c
+index be388ada3aa20..1bc4f911ba357 100644
+--- a/libavcodec/h264_direct.c
++++ b/libavcodec/h264_direct.c
+@@ -292,7 +292,8 @@ static void pred_spatial_direct_motion(const H264Context *const h, H264SliceCont
+         return;
+     }
+ 
+-    if (IS_INTERLACED(sl->ref_list[1][0].parent->mb_type[mb_xy])) { // AFL/AFR/FR/FL -> AFL/FL
++    if (sl->ref_list[1][0].parent->field_picture ||
++        IS_INTERLACED(sl->ref_list[1][0].parent->mb_type[mb_xy])) { // AFL/AFR/FR/FL -> AFL/FL
+         if (!IS_INTERLACED(*mb_type)) {                    //     AFR/FR    -> AFL/FL
+             mb_y  = (sl->mb_y & ~1) + sl->col_parity;
+             mb_xy = sl->mb_x +
+@@ -510,7 +511,8 @@ static void pred_temp_direct_motion(const H264Context *const h, H264SliceContext
+     await_reference_mb_row(h, &sl->ref_list[1][0],
+                            sl->mb_y + !!IS_INTERLACED(*mb_type));
+ 
+-    if (IS_INTERLACED(sl->ref_list[1][0].parent->mb_type[mb_xy])) { // AFL/AFR/FR/FL -> AFL/FL
++    if (sl->ref_list[1][0].parent->field_picture ||
++        IS_INTERLACED(sl->ref_list[1][0].parent->mb_type[mb_xy])) { // AFL/AFR/FR/FL -> AFL/FL
+         if (!IS_INTERLACED(*mb_type)) {                    //     AFR/FR    -> AFL/FL
+             mb_y  = (sl->mb_y & ~1) + sl->col_parity;
+             mb_xy = sl->mb_x +

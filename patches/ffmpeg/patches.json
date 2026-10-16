@@ -1,0 +1,37 @@
+[
+  {
+    "sha": "5cff5a3a5ad09bd77a43e2d5149b1f01a7feb4ce",
+    "title": "avformat/oggparsevorbis.c: Prevent integer overflow when summing header lengths; add bounds check.",
+    "patchSHA256": "2f74e28453c7b74e6757849368ed3a2b234c352478eeb135b452a01efb90d002"
+  },
+  {
+    "sha": "8139862d3d034c100cb7fda576aed05c1cfc91db",
+    "title": "avcodec/get_buffer: use frame pixel format instead of context",
+    "patchSHA256": "80d32e5a773b9ad00471caf7747fcac0713130cbd0052f45c78d49b22af7fd18"
+  },
+  {
+    "sha": "c13d2d1152ad5e4461edfab445e043f244ce379d",
+    "title": "avcodec/h264_direct: move check before loading things",
+    "patchSHA256": "d1b958b39531c8a17271cc87d2315943930d1a7ebe3dcd554b568340c25f290f"
+  },
+  {
+    "sha": "c277e33a18c0d7f7812b00aced15a56a1b263d28",
+    "title": "avcodec/h264_direct: await both fields of a colocated field pair",
+    "patchSHA256": "7631bfbe327c777a4ac759fd21737119babf3be98f9a9ab3a43505fdb293ceb3"
+  },
+  {
+    "sha": "facf02226a11d240e8959b97dd837bde6f3f34ee",
+    "title": "avcodec/h264_slice: clear the ER picture when starting a second field",
+    "patchSHA256": "67fb7505697fa38db9a961c6a68f78aa17b15b3217fc86738b77bd98deea4a41"
+  },
+  {
+    "sha": "a4f6f7588ed5f68ded49136b321a5ceb72671a63",
+    "title": "avcodec/h264_direct: do not read the other field's rows of colocated mb_type",
+    "patchSHA256": "f4e3e4732866396a6a01bf10574780e38ea4536e887e10f0e76e8714d084c152"
+  },
+  {
+    "sha": "8452c937149e8d9c9a36ba2e259e10cb715de410",
+    "title": "avformat/mov: don't leak on realloc failure",
+    "patchSHA256": "dd1a6dfb729b9e040795f79424157658006e5b6a09c73819767ca547c21a4fcd"
+  }
+]

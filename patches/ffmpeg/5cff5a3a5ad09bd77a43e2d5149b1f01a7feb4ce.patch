@@ -1,0 +1,30 @@
+From 5cff5a3a5ad09bd77a43e2d5149b1f01a7feb4ce Mon Sep 17 00:00:00 2001
+From: Romain Beauxis <romain.beauxis@gmail.com>
+Date: Thu, 21 May 2026 20:55:41 +0000
+Subject: [PATCH] avformat/oggparsevorbis.c: Prevent integer overflow when
+ summing header lengths; add bounds check.
+
+Cherry-picked from 6e0e13b0bf0493e764f0cdf9d0912b92e118bf32
+
+Signed-off-by: Romain Beauxis <romain.beauxis@gmail.com>
+---
+ libavformat/oggparsevorbis.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/libavformat/oggparsevorbis.c b/libavformat/oggparsevorbis.c
+index 6fd12560bc9cb..48c62640a5a85 100644
+--- a/libavformat/oggparsevorbis.c
++++ b/libavformat/oggparsevorbis.c
+@@ -223,8 +223,11 @@ static int fixup_vorbis_headers(AVFormatContext *as,
+     int i, offset, len, err;
+     int buf_len;
+     unsigned char *ptr;
++    uint64_t total_len = (uint64_t)priv->len[0] + priv->len[1] + priv->len[2];
++    if (total_len + total_len / 255 + 64 > INT_MAX)
++        return AVERROR_INVALIDDATA;
+ 
+-    len = priv->len[0] + priv->len[1] + priv->len[2];
++    len = total_len;
+     buf_len = len + len / 255 + 64;
+ 
+     if (*buf)
