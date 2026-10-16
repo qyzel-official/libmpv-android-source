@@ -1,7 +1,7 @@
 # libmpv for QYZEL Drive (Android) — corresponding source
 
 This package is the corresponding source for the `libmpv.so` media library
-bundled in **QYZEL Drive for Android, libmpv build 2124**. It is provided so
+bundled in **QYZEL Drive for Android, libmpv build 2125**. It is provided so
 that users and developers can study, modify and rebuild the library and
 replace it in the app, as permitted by the GNU Lesser General Public License.
 
@@ -17,13 +17,25 @@ Only these two ABIs are shipped. SHA-256 of the files as stored in the APK:
 
 | ABI | File | SHA-256 | Size (bytes) |
 |---|---|---|---|
-| arm64-v8a | `libmpv.so` | `9fb6c988d8f1097117b2abd4294a3577fb40721c952f337ca1d136bc73e57045` | 13914120 |
+| arm64-v8a | `libmpv.so` | `824dac20defb20a54f1d43bd88ad05b192246f5a070facb962e43de4cd344374` | 8391368 |
 | arm64-v8a | `libmediakitandroidhelper.so` | `ab55b1d34665dba8fa7a451e82c466ee71b9698e7da6c9a3cb68a7c0ee7610d4` | |
-| armeabi-v7a | `libmpv.so` | `7c86f239b35c53d04d82239b408eae438ca18581b8222432b515cf65fc939ec3` | 12943404 |
+| armeabi-v7a | `libmpv.so` | `c4826ab6526d5efae48aff2fa0e7eca75db585c1aba41a28d7af5149ad6d46d1` | 7616680 |
 | armeabi-v7a | `libmediakitandroidhelper.so` | `506d0bc7775fe9888be6b6e889d8556ca0574dba65813866e2158cbf52a8c8b1` | |
 
 `libmediakitandroidhelper.so` is an unmodified upstream prebuilt from the
 media_kit project (MIT license); see "Known limitations".
+
+Build 2124 (the previous build, never distributed outside internal testing)
+is recorded in this repository's history at commit `7d7db67`.
+
+### What changed in build 2125
+
+FFmpeg is reconfigured with `--disable-everything` and only the formats
+that QYZEL dashcams produce (H.264/AAC in MPEG-TS, MP4 and RTSP; HEVC only
+through Android MediaCodec). As a result FFmpeg no longer uses Mbed TLS,
+libxml2 or dav1d, and those libraries are not linked into `libmpv.so`.
+One local FFmpeg patch was added (`qyzel-mov-skip-pssh.patch`). mpv,
+libplacebo, libass, HarfBuzz, FreeType and FriBidi are unchanged from 2124.
 
 ## Layout
 
@@ -42,7 +54,10 @@ licenses/            license and notice files of all components
 
 ## Components
 
-All components are statically linked into `libmpv.so`.
+All components are statically linked into `libmpv.so`, except Mbed TLS,
+libxml2 and dav1d: in build 2125 they are still built into the dependency
+prefix by step 1 (their archives are kept so the prefix can be reproduced),
+but FFmpeg is configured without them and they are not linked.
 
 | Component | Version | License | Upstream | Archive in `sources/` | SHA-256 |
 |---|---|---|---|---|---|
@@ -72,7 +87,8 @@ Notes:
   `libplacebo-7.360.1/`, so it can be extracted on top of the main archive.
   The `Vulkan-Headers` and `demos/3rdparty/nuklear` submodules were not used
   (Vulkan and demos are disabled).
-- FFmpeg is configured with `--enable-version3` (needed for Mbed TLS), so
+- FFmpeg is configured with `--enable-version3` (originally needed for
+  Mbed TLS and kept unchanged in build 2125), so
   FFmpeg — and therefore `libmpv.so` as a whole — is covered by the GNU LGPL
   version 3 or later.
 - The FFmpeg release tarball's OpenPGP signature (key fingerprint
@@ -96,6 +112,7 @@ Applied with `patch -p1` to the extracted `ffmpeg-6.1.6` tree, in this order:
 | `facf02226a11d240e8959b97dd837bde6f3f34ee.patch` | FFmpeg `release/6.1` | h264_slice: clear the ER picture when starting a second field |
 | `a4f6f7588ed5f68ded49136b321a5ceb72671a63.patch` | FFmpeg `release/6.1` | h264_direct: do not read the other field's rows of colocated mb_type |
 | `8452c937149e8d9c9a36ba2e259e10cb715de410.patch` | FFmpeg `release/6.1` | mov demuxer: don't leak on realloc failure |
+| `qyzel-mov-skip-pssh.patch` | QYZEL (local, build 2125) | mov demuxer: ignore `pssh` (DRM init data) boxes instead of parsing them, so the recursive init-info chain of CVE-2026-107678 is never built. Dashcam recordings are never encrypted. |
 
 The seven `release/6.1` patches are the upstream commits with the IDs in
 their file names (`https://github.com/FFmpeg/FFmpeg/commit/<id>.patch`);
@@ -153,9 +170,11 @@ Repeat for each ABI. `<prefix>` is an empty install prefix (create symlinks
    `STRIP=llvm-strip`, and the NDK `bin` directory on `PATH`. On macOS,
    `include/path.sh` expects GNU sed as `gsed`; the original run replaced it
    with `sed`.
-   Before building FFmpeg, apply the eight FFmpeg patches (see above).
-   `build/config/<abi>/ffmpeg-config.h` (`FFMPEG_CONFIGURATION`) and
-   `ffmpeg-config.mak` show the exact resulting configuration.
+   Before building FFmpeg, apply all nine FFmpeg patches (see above) and
+   configure it with the arguments recorded in
+   `build/config/<abi>/ffmpeg-config.h` (`FFMPEG_CONFIGURATION`);
+   `ffmpeg-config.mak` and `ffmpeg-config_components.h` show the exact
+   resulting configuration.
 2. **libplacebo** — extract `libplacebo-7.360.1.tar.gz`, then extract
    `libplacebo-3rdparty-submodules.tar.gz` over it, and run:
    ```
@@ -189,9 +208,14 @@ binaries, numbered in the order they ran:
 3. `3-build_candidate.py` — applies `mpv-autoload-upstream.patch` to the
    (already JNI-patched) mpv tree; intermediate mpv build.
 4. `4-media-hardening-build.py` — applies the seven FFmpeg `release/6.1`
-   patches to the configured FFmpeg tree, re-runs `make` (no reconfigure),
-   updates the FFmpeg static libraries in the prefix, builds the final
-   `libmpv.so` with the options above and strips it.
+   patches to the configured FFmpeg tree and re-runs `make` (build 2124).
+5. `5-libmpv-2125-build.py` — takes that patched FFmpeg tree, applies
+   `qyzel-mov-skip-pssh.patch`, **reconfigures** FFmpeg with the reduced
+   component list (the full `configure` arguments are in
+   `build/config/<abi>/ffmpeg-config.h`, `FFMPEG_CONFIGURATION`), runs
+   `make install` into the prefix, builds the final `libmpv.so` with the
+   options above, strips it, and fails if a removed component is still
+   present.
 
 Machine-specific paths in these files are replaced by placeholders: `$WORK`
 (build workspace root), `$ANDROID_SDK`, `$HOME`, and `$OLDWORK` (an earlier
