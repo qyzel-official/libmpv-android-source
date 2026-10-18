@@ -1,7 +1,7 @@
 # libmpv for QYZEL Drive (Android) — corresponding source
 
 This package is the corresponding source for the `libmpv.so` media library
-bundled in **QYZEL Drive for Android, libmpv build 2125**. It is provided so
+bundled in **QYZEL Drive for Android, libmpv build 2126**. It is provided so
 that users and developers can study, modify and rebuild the library and
 replace it in the app, as permitted by the GNU Lesser General Public License.
 
@@ -17,21 +17,34 @@ Only these two ABIs are shipped. SHA-256 of the files as stored in the APK:
 
 | ABI | File | SHA-256 | Size (bytes) |
 |---|---|---|---|
-| arm64-v8a | `libmpv.so` | `824dac20defb20a54f1d43bd88ad05b192246f5a070facb962e43de4cd344374` | 8391368 |
+| arm64-v8a | `libmpv.so` | `d1d358f5f888cb6bd18551ecf859ecac39aec6128d046494c978d5e9d8528006` | 8218984 |
 | arm64-v8a | `libmediakitandroidhelper.so` | `ab55b1d34665dba8fa7a451e82c466ee71b9698e7da6c9a3cb68a7c0ee7610d4` | |
-| armeabi-v7a | `libmpv.so` | `c4826ab6526d5efae48aff2fa0e7eca75db585c1aba41a28d7af5149ad6d46d1` | 7616680 |
+| armeabi-v7a | `libmpv.so` | `5addf332301c315f8998f4936360f06134940bef52f9f7a8c16fd0e9ee861557` | 7455848 |
 | armeabi-v7a | `libmediakitandroidhelper.so` | `506d0bc7775fe9888be6b6e889d8556ca0574dba65813866e2158cbf52a8c8b1` | |
 
 `libmediakitandroidhelper.so` is an unmodified upstream prebuilt from the
 media_kit project (MIT license); see "Known limitations".
 
-Build 2124 (the previous build, never distributed outside internal testing)
-is recorded in this repository's history at commit `7d7db67`.
+Earlier builds, never distributed outside internal testing, are recorded in
+this repository's history: build 2125 at commit `7a90ef0`, build 2124 at
+commit `7d7db67`.
+
+### What changed in build 2126
+
+FFmpeg is configured as in build 2125, but without the RTSP demuxer and the
+RTP and UDP protocols. The app opens live dashcam streams with its own code
+and Android MediaCodec, so `libmpv.so` only plays recordings from local files
+or over HTTP. Removing RTSP also removes the RTP, ASF and RealMedia demuxers
+it pulled in. Compared with 2125 exactly these components are now disabled:
+`ASF_DEMUXER`, `RM_DEMUXER`, `RTP_PROTOCOL`, `RTSP_DEMUXER`, `UDP_PROTOCOL`.
+Sources, patches and all other options are unchanged from 2125; the build
+script is `build/scripts/6-libmpv-2126-build.py`.
 
 ### What changed in build 2125
 
 FFmpeg is reconfigured with `--disable-everything` and only the formats
-that QYZEL dashcams produce (H.264/AAC in MPEG-TS, MP4 and RTSP; HEVC only
+that QYZEL dashcams produce (H.264/AAC in MPEG-TS, MP4 and, until build 2126,
+RTSP; HEVC only
 through Android MediaCodec). As a result FFmpeg no longer uses Mbed TLS,
 libxml2 or dav1d, and those libraries are not linked into `libmpv.so`.
 One local FFmpeg patch was added (`qyzel-mov-skip-pssh.patch`). mpv,
@@ -55,7 +68,7 @@ licenses/            license and notice files of all components
 ## Components
 
 All components are statically linked into `libmpv.so`, except Mbed TLS,
-libxml2 and dav1d: in build 2125 they are still built into the dependency
+libxml2 and dav1d: since build 2125 they are still built into the dependency
 prefix by step 1 (their archives are kept so the prefix can be reproduced),
 but FFmpeg is configured without them and they are not linked.
 
@@ -88,7 +101,7 @@ Notes:
   The `Vulkan-Headers` and `demos/3rdparty/nuklear` submodules were not used
   (Vulkan and demos are disabled).
 - FFmpeg is configured with `--enable-version3` (originally needed for
-  Mbed TLS and kept unchanged in build 2125), so
+  Mbed TLS and kept unchanged since build 2125), so
   FFmpeg — and therefore `libmpv.so` as a whole — is covered by the GNU LGPL
   version 3 or later.
 - The FFmpeg release tarball's OpenPGP signature (key fingerprint
@@ -215,7 +228,11 @@ binaries, numbered in the order they ran:
    `build/config/<abi>/ffmpeg-config.h`, `FFMPEG_CONFIGURATION`), runs
    `make install` into the prefix, builds the final `libmpv.so` with the
    options above, strips it, and fails if a removed component is still
-   present.
+   present (build 2125).
+6. `6-libmpv-2126-build.py` — the same as step 5, with RTSP, RTP and UDP
+   also disabled (build 2126, the shipped binaries). It starts again from the
+   patched FFmpeg tree of step 4 and additionally fails if any RTSP, RTP,
+   SDP, UDP, ASF or RealMedia symbol is still present in `libmpv.so`.
 
 Machine-specific paths in these files are replaced by placeholders: `$WORK`
 (build workspace root), `$ANDROID_SDK`, `$HOME`, and `$OLDWORK` (an earlier
